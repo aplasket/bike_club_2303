@@ -25,4 +25,39 @@ RSpec.describe BikeClub do
       expect(@bike_club1.bikers).to eq([])
     end
   end
+
+  describe "#add new biker" do
+    it "can add a biker to the biker array" do
+      @bike_club1.add_biker(@biker)
+      @bike_club1.add_biker(@biker2)
+
+      expect(@bike_club1.bikers).to eq([@biker, @biker2])
+    end
+  end
+
+  describe "#most rides" do
+    it "returns biker object of who logged most rides" do
+      @bike_club1.add_biker(@biker)
+      @bike_club1.add_biker(@biker2)
+      @biker.learn_terrain!(:gravel)
+      @biker.learn_terrain!(:hills)
+
+      @biker.log_ride(@ride1, 92.5)
+      @biker.log_ride(@ride1, 91.1)
+      @biker.log_ride(@ride2, 60.9)
+      @biker.log_ride(@ride2, 61.6)
+      
+      @biker2.learn_terrain!(:gravel)
+      @biker2.learn_terrain!(:hills)
+      @biker2.log_ride(@ride1, 95.0) #can't bike this distance
+      @biker2.log_ride(@ride2, 65.0)
+
+      expect(@biker.rides).to eq({@ride1 => [92.5, 91.1],
+                                  @ride2 => [60.9, 61.6]})
+      expect(@biker2.rides).to eq({@ride2 => [65.0]})
+      
+      expect(@bike_club1.most_rides).to eq(@biker)
+
+    end
+  end
 end
