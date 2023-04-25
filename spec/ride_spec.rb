@@ -6,6 +6,10 @@ RSpec.describe Ride do
                         distance: 10.7, 
                         loop: false,
                         terrain: :hills})
+    @ride2 = Ride.new({ name: "Town Lake", 
+                        distance: 14.9, 
+                        loop: true, 
+                        terrain: :gravel})
   end
   
   describe "#initialize" do
@@ -20,12 +24,14 @@ RSpec.describe Ride do
   describe "#loop?" do
     it "returns a boolean of loop attributes" do
       expect(@ride1.loop?).to eq(false)
+      expect(@ride2.loop?).to eq(true)
     end
   end
 
   describe "#total distance" do
     it "calculates total distance" do
       expect(@ride1.total_distance).to eq(21.4)
+      expect(@ride2.total_distance).to eq(14.9)
     end
   end
 end
