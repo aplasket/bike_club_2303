@@ -99,7 +99,6 @@ RSpec.describe BikeClub do
 
   describe "#bikers eligible" do
     it "returns array of eligible biker objects" do
-      biker3 = Biker.new("Tony", 50)
       @bike_club1.add_biker(@biker)
       @bike_club1.add_biker(@biker2)
 
