@@ -23,7 +23,7 @@ class Biker
     #IF acceptable terrain && less than max distance, keeps track of all rides and times for those rides.
     
     ##psuedocode:
-    # return false /nil if not acceptable terrain || rides.total_distance < @max_distance
+    # ?? return false /nil if not acceptable terrain || rides.total_distance < @max_distance
     # if @acceptable_terrain.include?(ride.terrain) && !@rides.keys.include?(ride) && @maxdistance, rides[ride] = [time]
     #else  @acceptable_terrain.include?(ride) && @rides.keys.include?(ride), rides[ride] << time
 
@@ -33,5 +33,17 @@ class Biker
       @rides[ride] = [time]
     end
 
+
+    def personal_record(ride)
+      #personal record for a specific ride. 
+      #This is the lowest time recorded for a ride. 
+      # This method will return false if the Biker hasn't completed the ride
+
+      #psuedocode:
+      #return false, if @rides[ride].nil? 
+      # @rides[ride] min by or min ...
+      return false if @rides[ride].nil?
+      @rides[ride].min
+    end
   end
 end
