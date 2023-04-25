@@ -20,4 +20,33 @@ class BikeClub
       biker.total_rides
     end
   end
+
+  def best_time(ride)
+    #return biker object with the best tie for a given ride
+    #psuedocode: iterate through bikers, find biker.personal_record(ride)
+    
+    @bikers.min_by { |biker| biker.personal_record(ride)}
+    
+    # biker_times = {}
+    # @bikers.each do |biker| 
+    #   biker_times[ride] = {person: biker, record: biker.personal_record(ride)}
+    #   require 'pry'; binding.pry
+    # end
+
+    # biker_times[ride]
+      # biker.personal_record(ride)
+    # end
+  end
+
+  def bikers_eligible(ride)
+    # A Biker is eligible for a Ride if the terrain is acceptable to them and the total distance does not exceed their max distance.
+    eligible_bikers = []
+    @bikers.each do |biker|
+      if biker.acceptable_terrain.include?(ride.terrain) && biker.max_distance >= ride.total_distance
+        eligible_bikers << biker
+      end
+    end
+    eligible_bikers
+  end
+
 end

@@ -68,4 +68,56 @@ RSpec.describe BikeClub do
       expect(@bike_club1.most_rides).to eq(@biker2)
     end
   end
+
+  describe "#best time" do
+    xit "returns the biker object with the best time for ride" do
+      biker3 = Biker.new("Tony", 50)
+      @bike_club1.add_biker(@biker)
+      @bike_club1.add_biker(@biker2)
+      @bike_club1.add_biker(biker3)
+
+      @biker.learn_terrain!(:gravel)
+      @biker.learn_terrain!(:hills)
+
+      @biker.log_ride(@ride1, 92.5)
+      @biker.log_ride(@ride1, 91.1)
+      @biker.log_ride(@ride2, 60.9)
+      @biker.log_ride(@ride2, 61.6)
+      
+      @biker2.learn_terrain!(:gravel)
+      @biker2.learn_terrain!(:hills)
+      @biker2.log_ride(@ride2, 65.0)
+
+      biker3.learn_terrain!(:gravel)
+      biker3.learn_terrain!(:hills)
+      biker3.log_ride(@ride1, 92.6)
+
+      expect(@bike_club1.best_time(@ride1)).to eq(biker3)
+      expect(@bike_club1.best_time(@ride2)).to eq(@biker2)
+    end
+  end
+
+  describe "#bikers eligible" do
+    it "returns array of eligible biker objects" do
+      biker3 = Biker.new("Tony", 50)
+      @bike_club1.add_biker(@biker)
+      @bike_club1.add_biker(@biker2)
+
+      @biker.learn_terrain!(:gravel)
+      @biker.learn_terrain!(:hills)
+
+      @biker.log_ride(@ride1, 92.5)
+      @biker.log_ride(@ride1, 91.1)
+      @biker.log_ride(@ride2, 60.9)
+      @biker.log_ride(@ride2, 61.6)
+      
+      @biker2.learn_terrain!(:gravel)
+      @biker2.learn_terrain!(:hills)
+      @biker2.log_ride(@ride2, 65.0)
+      @biker2.log_ride(@ride1, 65.0) #not elgible - distance too long
+
+      expect(@bike_club1.bikers_eligible(@ride1)).to eq([@biker])
+      expect(@bike_club1.bikers_eligible(@ride2)).to eq([@biker, @biker2])
+    end
+  end
 end
