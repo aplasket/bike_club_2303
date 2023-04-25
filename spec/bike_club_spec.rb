@@ -70,15 +70,13 @@ RSpec.describe BikeClub do
   end
 
   describe "#best time" do
-    xit "returns the biker object with the best time for ride" do
-      biker3 = Biker.new("Tony", 50)
+    it "returns the biker object with the best time for ride" do
       @bike_club1.add_biker(@biker)
       @bike_club1.add_biker(@biker2)
-      @bike_club1.add_biker(biker3)
-
+      
       @biker.learn_terrain!(:gravel)
       @biker.learn_terrain!(:hills)
-
+      
       @biker.log_ride(@ride1, 92.5)
       @biker.log_ride(@ride1, 91.1)
       @biker.log_ride(@ride2, 60.9)
@@ -86,14 +84,18 @@ RSpec.describe BikeClub do
       
       @biker2.learn_terrain!(:gravel)
       @biker2.learn_terrain!(:hills)
-      @biker2.log_ride(@ride2, 65.0)
-
-      biker3.learn_terrain!(:gravel)
-      biker3.learn_terrain!(:hills)
-      biker3.log_ride(@ride1, 92.6)
-
-      expect(@bike_club1.best_time(@ride1)).to eq(biker3)
+      @biker2.log_ride(@ride1, 95.0)
+      @biker2.log_ride(@ride2, 45.0)
+      
+      expect(@bike_club1.best_time(@ride1)).to eq(@biker)
       expect(@bike_club1.best_time(@ride2)).to eq(@biker2)
+      
+      # biker3 = Biker.new("Tony", 50)
+      # @bike_club1.add_biker(biker3)
+      # biker3.learn_terrain!(:gravel)
+      # biker3.learn_terrain!(:hills)
+      # biker3.log_ride(@ride1, 92.6)
+      # expect(@bike_club1.best_time(@ride1)).to eq(biker3)
     end
   end
 

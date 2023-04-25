@@ -24,9 +24,6 @@ class BikeClub
   def best_time(ride)
     #return biker object with the best tie for a given ride
     #psuedocode: iterate through bikers, find biker.personal_record(ride)
-    
-    @bikers.min_by { |biker| biker.personal_record(ride)}
-    
     # biker_times = {}
     # @bikers.each do |biker| 
     #   biker_times[ride] = {person: biker, record: biker.personal_record(ride)}
@@ -36,6 +33,11 @@ class BikeClub
     # biker_times[ride]
       # biker.personal_record(ride)
     # end
+    
+    @bikers.min_by do |biker| 
+      biker.personal_record(ride)
+    end
+    
   end
 
   def bikers_eligible(ride)
