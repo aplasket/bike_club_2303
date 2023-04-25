@@ -26,16 +26,17 @@ class Biker
     elsif @acceptable_terrain.include?(ride.terrain) && !@rides.keys.include?(ride) && ride.total_distance < @max_distance 
       @rides[ride] = [time]
     end
+  end
 
 
     def personal_record(ride)
+
       #psuedocode:
       #return false, if @rides[ride].nil? 
       # @rides[ride] min by or min ...
       return false if @rides[ride].nil?
       @rides[ride].min
     end
-  end
 
   def total_rides
     total = 0
