@@ -11,6 +11,8 @@ RSpec.describe Biker do
                         distance: 14.9, 
                         loop: true, 
                         terrain: :gravel})
+
+    @biker2 = Biker.new("Athena", 15)
   end
 
   describe "#initialize" do
@@ -51,6 +53,17 @@ RSpec.describe Biker do
                   @ride2 => [60.9, 61.6]}
 
       expect(@biker.rides).to eq(expected)
+
+      @biker2.log_ride(@ride1, 97.0) #doesn't know terrain
+      @biker2.log_ride(@ride2, 67.0) #doesn't know terrain
+      expect(@biker2.rides).to eq({})
+
+      @biker2.learn_terrain!(:gravel)
+      @biker2.learn_terrain!(:hills)
+      @biker2.log_ride(@ride1, 95.0) #can't bike this distance
+      @biker2.log_ride(@ride2, 65.0) #yes! can bike this distance ride.total distce < biker.max_distance
+
+      expect(@biker2.rides).to eq({@ride2 => [65.0]})
     end
   end
 
@@ -66,6 +79,13 @@ RSpec.describe Biker do
 
       expect(@biker.personal_record(@ride1)).to eq(91.1)
       expect(@biker.personal_record(@ride2)).to eq(60.9)
+
+      @biker2.learn_terrain!(:gravel)
+      @biker2.learn_terrain!(:hills)
+      @biker2.log_ride(@ride1, 95.0)
+      @biker2.log_ride(@ride2, 65.0)
+      expect(@biker2.personal_record(@ride2)).to eq(65.0)
+      expect(@biker2.personal_record(@ride1)).to eq(false)
     end
   end
 end
