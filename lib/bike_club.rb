@@ -13,8 +13,8 @@ class BikeClub
 
   def most_rides
     #psuedocode:
-    #iterate throught all the bikers, and see who has the most loged rides (greater number of rides in hash)
-    # @bikers.each do |biker|, biker.rides.count or biker.rides.max?
+    #iterate throught all the bikers, and see who has the most total_rides 
+    # @bikers.each ... or bikers.max_by, find biker.total_rides
     
     @bikers.max_by do |biker, total|
       biker.total_rides
