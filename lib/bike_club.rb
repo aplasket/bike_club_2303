@@ -16,28 +16,11 @@ class BikeClub
     #iterate throught all the bikers, and see who has the most total_rides 
     # @bikers.each ... or bikers.max_by, find biker.total_rides
     
-    @bikers.max_by do |biker, total|
-      biker.total_rides
-    end
+    @bikers.max_by {|biker, total| biker.total_rides} 
   end
 
-  def best_time(ride)
-    #return biker object with the best tie for a given ride
-    #psuedocode: iterate through bikers, find biker.personal_record(ride)
-    # biker_times = {}
-    # @bikers.each do |biker| 
-    #   biker_times[ride] = {person: biker, record: biker.personal_record(ride)}
-    #   require 'pry'; binding.pry
-    # end
-
-    # biker_times[ride]
-      # biker.personal_record(ride)
-    # end
-    
-    @bikers.min_by do |biker| 
-      biker.personal_record(ride)
-    end
-    
+  def best_time(ride) 
+    @bikers.min_by {|biker| biker.personal_record(ride)}  
   end
 
   def bikers_eligible(ride)
@@ -51,3 +34,16 @@ class BikeClub
   end
 
 end
+
+#best time method:
+# #return biker object with the best tie for a given ride
+    #psuedocode: iterate through bikers, find biker.personal_record(ride)
+    # biker_times = {}
+    # @bikers.each do |biker| 
+    #   biker_times[ride] = {person: biker, record: biker.personal_record(ride)}
+    #   require 'pry'; binding.pry
+    # end
+
+    # biker_times[ride]
+      # biker.personal_record(ride)
+    # end
