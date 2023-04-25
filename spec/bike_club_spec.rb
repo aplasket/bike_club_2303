@@ -54,10 +54,18 @@ RSpec.describe BikeClub do
 
       expect(@biker.rides).to eq({@ride1 => [92.5, 91.1],
                                   @ride2 => [60.9, 61.6]})
+      expect(@biker.total_rides).to eq(4)
       expect(@biker2.rides).to eq({@ride2 => [65.0]})
-      
+      expect(@biker2.total_rides).to eq(1)
       expect(@bike_club1.most_rides).to eq(@biker)
 
+      @biker2.log_ride(@ride2, 15.0)
+      @biker2.log_ride(@ride2, 35.0)
+      @biker2.log_ride(@ride2, 60.0)
+      @biker2.log_ride(@ride2, 90.0)
+      expect(@biker2.total_rides).to eq(5)
+      expect(@biker2.rides).to eq({@ride2 => [65.0, 15.0, 35.0, 60.0, 90.0]})
+      expect(@bike_club1.most_rides).to eq(@biker2)
     end
   end
 end
